@@ -14,11 +14,10 @@
 #
 ################################################################################
 
-FROM gcr.io/oss-fuzz-base/base-builder
-RUN apt-get update &&  apt-cache madison cmake && apt-get install -y wget \
-    golang binutils cmake=3.31.12 ninja-build liblzma-dev libz-dev  \
+FROM gcr.io/oss-fuzz-base/base-builder-go
+RUN apt-get update && apt-get install -y wget \
+    binutils cmake ninja-build liblzma-dev libz-dev \
     pkg-config autoconf libtool
-RUN cmake --version
 RUN git clone --depth 1 https://boringssl.googlesource.com/boringssl
 # Use ASN.1 pdu protobuf and converter from the google/fuzzing repo.
 RUN git clone --depth 1 https://github.com/google/fuzzing.git
